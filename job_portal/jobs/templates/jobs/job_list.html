@@ -1,0 +1,18 @@
+{% extends 'jobs/base.html' %}
+{% block content %}
+<h2>Available Jobs</h2>
+<form method="get" class="mb-3">
+  <input type="text" name="q" placeholder="Search by title, company, or location" class="form-control" value="{{ request.GET.q }}">
+</form>
+
+<ul class="list-group">
+  {% for job in jobs %}
+    <li class="list-group-item">
+      <strong>{{ job.title }}</strong> at {{ job.company_name }} ({{ job.location }})
+      <a class="btn btn-sm btn-outline-primary float-end" href="{% url 'job_detail' job.id %}">View</a>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No jobs found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

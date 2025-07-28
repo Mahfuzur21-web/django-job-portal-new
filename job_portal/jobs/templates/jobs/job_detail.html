@@ -1,0 +1,9 @@
+{% extends 'jobs/base.html' %}
+{% block content %}
+<h2>{{ job.title }} at {{ job.company_name }}</h2>
+<p><strong>Location:</strong> {{ job.location }}</p>
+<p>{{ job.description }}</p>
+{% if user.is_authenticated and user.groups.first.name == 'Applicant' %}
+  <a href="{% url 'apply_job' job.id %}" class="btn btn-primary">Apply Now</a>
+{% endif %}
+{% endblock %}
